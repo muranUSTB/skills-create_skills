@@ -1,0 +1,22 @@
+{
+    "name": "hemr-skills",
+    "owner": {
+      "name": "hemr (沐然)",
+      "email": "hmr1442953114@163.com"
+    },
+    "metadata": {
+      "description": "沐然's original skills for creating Claude Code Skill",
+      "version": "1.0.0"
+    },
+    "plugins": [
+      {
+        "name": "skills-creator",
+        "description": "沐然创建的用于创建Claude Code Skill的工具",
+        "source": "./",
+        "strict": false,
+        "skills": [
+          "./skills/skills-creator"
+        ]
+      }
+    ]
+  }
