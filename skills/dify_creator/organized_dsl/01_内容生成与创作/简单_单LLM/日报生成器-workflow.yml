@@ -1,0 +1,175 @@
+app:
+  description: '将用户输入的今日工作内容进行美化和润色，生成专业的工作日报'
+  icon: '📝'
+  icon_background: '#E3F2FD'
+  mode: workflow
+  name: daily-work-summary
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+    opening_statement: ''
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: start-to-llm
+      source: '1741011655068'
+      sourceHandle: source
+      target: '1741011662463'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: llm-to-end
+      source: '1741011662463'
+      sourceHandle: source
+      target: end
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 今日工作内容
+          max_length: 10000
+          options: []
+          required: true
+          type: paragraph
+          variable: work_content
+        - label: 工作类型（选填）
+          max_length: 100
+          options: []
+          required: false
+          placeholder: 如：技术开发、产品设计、运营支持等
+          type: text-input
+          variable: work_type
+      height: 146
+      id: '1741011655068'
+      position:
+        x: 80
+        y: 263
+      positionAbsolute:
+        x: 80
+        y: 263
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-V3
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: system-prompt
+          role: system
+          text: '你是一个专业的职场写作助手，擅长将简单的工作描述润色成专业、清晰、重点突出的工作日报。
+
+## 工作要求
+1. 对用户输入的工作内容进行美化润色
+2. 使用专业但简洁的语言表达
+3. 突出工作成果和价值
+4. 保持条理清晰，便于阅读
+5. 可适当补充合理的专业术语和工作细节
+
+## 输出格式
+请生成一份工作日报，包含以下部分：
+- **今日工作总结**：润色后的工作内容，使用清晰的分点描述
+- **工作成果**：提炼关键产出和价值点（如有）
+
+注意：
+- 不要添加虚假信息或夸大其词
+- 保持原有工作的核心意思
+- 语言要专业但不啰嗦
+- 尽量使用动词开头描述工作内容'
+        - id: user-prompt
+          role: user
+          text: "请将以下今日工作内容润色成专业的工作日报：\n\n【工作类型】：{{#1741011655068.work_type# || '通用'}}\n\n【原始工作内容】：\n{{#1741011655068.work_content#}}\n\n请直接输出润色后的工作日报内容。"
+        selected: false
+        title: 工作内容润色
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 118
+      id: '1741011662463'
+      position:
+        x: 484
+        y: 263
+      positionAbsolute:
+        x: 484
+        y: 263
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1741011662463'
+          - text
+          variable: summary
+        selected: false
+        title: 结束
+        type: end
+      height: 106
+      id: end
+      position:
+        x: 888
+        y: 263
+      positionAbsolute:
+        x: 888
+        y: 263
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+  viewport:
+    x: 0
+    y: 0
+    zoom: 0.8
