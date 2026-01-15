@@ -36,6 +36,41 @@
 我想创建一个 Dify 工作流，用于...
 ```
 
+### 3. Agent Builder（AI Agent 开发套件）
+
+**目录**：`skills/Agent_builder/`
+
+专业的 AI Agent 开发套件，支持 LangGraph、AgentScope、DeepAgent、AutoGen、CrewAI 等主流框架，提供完整的六阶段开发工作流。
+
+**核心组件**：
+
+| Subagent | 颜色 | 职责 |
+|---------|------|------|
+| **agent-create** | - | 主控 Agent，负责协调整个开发流程 |
+| **agent-doc-explorer** | 🔵 | 文档探索专家，搜索分析官方文档 |
+| **agent-arch-planner** | 🟢 | 架构规划师，设计项目结构和模块划分 |
+| **agent-tester** | 🟠 | 测试专家，负责代码测试和质量验证 |
+
+**工作流程**：
+1. **需求收集与分析** - 充分理解用户需求，确定最佳框架选择
+2. **PRD 文档生成** - 基于需求分析，生成结构化产品需求文档
+3. **文档探索** - 搜索官方文档，充分了解框架实现细节
+4. **结构规划** - 规划完整的项目结构和模块划分
+5. **代码开发** - 生成完整的代码实现
+6. **测试验证** - 执行测试，确保代码质量
+
+**支持的框架**：
+- **LangGraph** - 循环工作流、状态管理强，适用于复杂对话、任务编排
+- **AgentScope** - 分散式架构、易用性好，适用于快速原型、多 Agent 协作
+- **DeepAgent** - 深度学习集成、研究导向，适用于研究实验、高级特性
+- **AutoGen** - 多 Agent 对话、自动化强，适用于企业应用、工作流自动化
+- **CrewAI** - 角色扮演、编排简洁，适用于团队模拟、角色协作
+
+**使用方式**：
+```
+请帮我创建一个新的 Agent 项目，使用 LangGraph 框架
+```
+
 ## 如何使用这些 Skills
 
 ### 方式一：直接使用
@@ -105,7 +140,7 @@ author: 作者名
 ## 项目结构
 
 ```
-skill-creator/
+skills-create_skills/
 ├── README.md                    # 本文件
 ├── skills/
 │   ├── skills-creator/          # Skill 创建工具
@@ -123,15 +158,29 @@ skill-creator/
 │   │           ├── 07_code_development.md
 │   │           └── 08_custom_template.md
 │   │
-│   └── dify_creator/            # Dify 工作流生成器
-│       ├── SKILL.md
-│       ├── README.md
-│       └── organized_dsl/
-│           ├── INDEX.md
-│           ├── Dify_DSL_节点完整参考指南.md
-│           ├── 01_内容生成与创作/
-│           ├── 02_图像生成与设计/
-│           └── ...
+│   ├── dify_creator/            # Dify 工作流生成器
+│   │   ├── SKILL.md
+│   │   ├── README.md
+│   │   └── organized_dsl/
+│   │       ├── INDEX.md
+│   │       ├── Dify_DSL_节点完整参考指南.md
+│   │       ├── 01_内容生成与创作/
+│   │       ├── 02_图像生成与设计/
+│   │       └── ...
+│   │
+│   └── Agent_builder/           # AI Agent 开发套件
+│       ├── agent-create/        # 主控 Agent
+│       │   ├── SKILL.md
+│       │   ├── README.md
+│       │   └── LICENSE.txt
+│       ├── agent-doc-explorer/  # 🔵 文档探索专家
+│       │   └── agent.md
+│       ├── agent-arch-planner/  # 🟢 架构规划师
+│       │   └── agent.md
+│       ├── agent-tester/        # 🟠 测试专家
+│       │   └── agent.md
+│       └── docs/
+│           └── SUBAGENT_SKILL_GUIDE.md
 ```
 
 ## 许可证
@@ -163,6 +212,12 @@ skill-creator/
 - 完善文档
 
 ## 更新日志
+
+### v1.1.0 (2025-01-15)
+- 添加 Agent Builder（AI Agent 开发套件）
+- 支持 LangGraph、AgentScope、DeepAgent、AutoGen、CrewAI 等主流框架
+- 提供完整的六阶段专业开发工作流
+- 集成文档探索、架构规划、测试验证等 Subagent
 
 ### v1.0.0 (2025-01-06)
 - 初始化项目
